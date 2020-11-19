@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chenzhiheng.mapper.ReportMapper">
+  <resultMap id="BaseResultMap" type="com.chenzhiheng.model.Report">
+    <id column="report_id" jdbcType="INTEGER" property="reportId" />
+    <result column="reported_id" jdbcType="INTEGER" property="reportedId" />
+    <result column="reported_user_id" jdbcType="INTEGER" property="reportedUserId" />
+    <result column="reported_reply_id" jdbcType="INTEGER" property="reportedReplyId" />
+    <result column="reported_type" jdbcType="INTEGER" property="reportedType" />
+    <result column="report_desc" jdbcType="VARCHAR" property="reportDesc" />
+    <result column="complain_user_id" jdbcType="INTEGER" property="complainUserId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="report_status" jdbcType="INTEGER" property="reportStatus" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    report_id, reported_id, reported_user_id, reported_reply_id, reported_type, report_desc, 
+    complain_user_id, create_time, update_time, report_status
+  </sql>
+  <select id="selectAllByType" parameterType="java.lang.Integer" resultType="com.chenzhiheng.vo.ReportVO">
+    SELECT
+    report.report_id as reportId,
+    (
+    SELECT
+    group_concat( report_type_name )
+    FROM
+    report_type
+    LEFT JOIN rpt_report_type rt ON ( report_type.report_type_id = rt.report_type_id )
+    WHERE
+    rt.report_id = report.report_id
+    ) AS reportTags ,
+    report.report_desc as reportDesc,
+    report.create_time as reportTime,
+    report.complain_user_id as complainUserId,
+    u1.user_nickname as complainUserNickname,
+    report.reported_id as reportedId,
+    report.reported_reply_id as reportedReplyId,
+    report.reported_user_id as reportedUserId,
+    u2.user_nickname as reportedUserNickname
+    FROM
+    report
+    LEFT JOIN user_info u1 on (report.complain_user_id = u1.user_id)
+    LEFT JOIN user_info u2 on (report.reported_user_id = u2.user_id)
+    WHERE report.reported_type = #{type} and report.report_status = 0
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from report
+    where report_id = #{reportId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from report
+    where report_id = #{reportId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.chenzhiheng.model.Report">
+    insert into report (report_id, reported_id, reported_user_id, 
+      reported_reply_id, reported_type, report_desc, 
+      complain_user_id, create_time, update_time, 
+      report_status)
+    values (#{reportId,jdbcType=INTEGER}, #{reportedId,jdbcType=INTEGER}, #{reportedUserId,jdbcType=INTEGER}, 
+      #{reportedReplyId,jdbcType=INTEGER}, #{reportedType,jdbcType=INTEGER}, #{reportDesc,jdbcType=VARCHAR}, 
+      #{complainUserId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{reportStatus,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.chenzhiheng.model.Report">
+    insert into report
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="reportId != null">
+        report_id,
+      </if>
+      <if test="reportedId != null">
+        reported_id,
+      </if>
+      <if test="reportedUserId != null">
+        reported_user_id,
+      </if>
+      <if test="reportedReplyId != null">
+        reported_reply_id,
+      </if>
+      <if test="reportedType != null">
+        reported_type,
+      </if>
+      <if test="reportDesc != null">
+        report_desc,
+      </if>
+      <if test="complainUserId != null">
+        complain_user_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="reportStatus != null">
+        report_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="reportId != null">
+        #{reportId,jdbcType=INTEGER},
+      </if>
+      <if test="reportedId != null">
+        #{reportedId,jdbcType=INTEGER},
+      </if>
+      <if test="reportedUserId != null">
+        #{reportedUserId,jdbcType=INTEGER},
+      </if>
+      <if test="reportedReplyId != null">
+        #{reportedReplyId,jdbcType=INTEGER},
+      </if>
+      <if test="reportedType != null">
+        #{reportedType,jdbcType=INTEGER},
+      </if>
+      <if test="reportDesc != null">
+        #{reportDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="complainUserId != null">
+        #{complainUserId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reportStatus != null">
+        #{reportStatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.chenzhiheng.model.Report">
+    update report
+    <set>
+      <if test="reportedId != null">
+        reported_id = #{reportedId,jdbcType=INTEGER},
+      </if>
+      <if test="reportedUserId != null">
+        reported_user_id = #{reportedUserId,jdbcType=INTEGER},
+      </if>
+      <if test="reportedReplyId != null">
+        reported_reply_id = #{reportedReplyId,jdbcType=INTEGER},
+      </if>
+      <if test="reportedType != null">
+        reported_type = #{reportedType,jdbcType=INTEGER},
+      </if>
+      <if test="reportDesc != null">
+        report_desc = #{reportDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="complainUserId != null">
+        complain_user_id = #{complainUserId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reportStatus != null">
+        report_status = #{reportStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where report_id = #{reportId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.chenzhiheng.model.Report">
+    update report
+    set reported_id = #{reportedId,jdbcType=INTEGER},
+      reported_user_id = #{reportedUserId,jdbcType=INTEGER},
+      reported_reply_id = #{reportedReplyId,jdbcType=INTEGER},
+      reported_type = #{reportedType,jdbcType=INTEGER},
+      report_desc = #{reportDesc,jdbcType=VARCHAR},
+      complain_user_id = #{complainUserId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      report_status = #{reportStatus,jdbcType=INTEGER}
+    where report_id = #{reportId,jdbcType=INTEGER}
+  </update>
+</mapper>

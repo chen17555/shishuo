@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.chenzhiheng.mapper.BlogTagMapper" >
+  <resultMap id="BaseResultMap" type="com.chenzhiheng.model.BlogTagKey" >
+    <id column="blog_id" property="blogId" jdbcType="INTEGER" />
+    <id column="tag_id" property="tagId" jdbcType="INTEGER" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="com.chenzhiheng.model.BlogTagKey" >
+    delete from blog_tag
+    where blog_id = #{blogId,jdbcType=INTEGER}
+      and tag_id = #{tagId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.chenzhiheng.model.BlogTagKey" >
+    insert into blog_tag (blog_id, tag_id)
+    values (#{blogId,jdbcType=INTEGER}, #{tagId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.chenzhiheng.model.BlogTagKey" >
+    insert into blog_tag
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="blogId != null" >
+        blog_id,
+      </if>
+      <if test="tagId != null" >
+        tag_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="blogId != null" >
+        #{blogId,jdbcType=INTEGER},
+      </if>
+      <if test="tagId != null" >
+        #{tagId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+</mapper>

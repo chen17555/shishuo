@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.chenzhiheng.mapper.BlogMapper" >
+  <resultMap id="BaseResultMap" type="com.chenzhiheng.model.Blog" >
+    <id column="blog_id" property="blogId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="blog_title" property="blogTitle" jdbcType="VARCHAR" />
+    <result column="blog_content" property="blogContent" jdbcType="VARCHAR" />
+    <result column="click_num" property="clickNum" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="blog_status" property="blogStatus" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    blog_id, user_id, blog_title, blog_content, click_num, create_time, update_time, 
+    blog_status
+  </sql>
+  <sql id="Base_Select_BlogVO">
+    DISTINCT
+    b.blog_id AS blogId,
+    u.user_id AS authorId,
+    u.user_nickname AS authorName,
+    blog_title as blogTitle,
+    click_num as clickNum,
+    b.create_time as postTime,
+    (SELECT count(*) from blog_reply WHERE blog_reply.blog_id = b.blog_id) as answerNum,
+    (
+    SELECT
+    GROUP_CONCAT( tag_name )
+    FROM
+    blog_tag
+    LEFT JOIN tag ON ( blog_tag.tag_id = tag.tag_id )
+    WHERE
+    blog_tag.blog_id = b.blog_id
+    ) AS tags
+  </sql>
+  <select id="selectQuestionListByUserIdOrTitleOrTime" resultType="com.chenzhiheng.vo.BlogVO">
+    SELECT
+      <include refid="Base_Select_BlogVO" />,
+      Left(blog_content,105) as blogContent
+    FROM
+      blog b
+    LEFT JOIN user_info u ON ( b.user_id = u.user_id )
+    WHERE
+      1=1
+      <if test="userId!=null">
+        AND  b.user_id = #{userId}
+      </if>
+      <if test="title!=null">
+        AND  b.blog_title = #{title}
+      </if>
+      <if test="startTime!=null">
+        AND  b.create_time >= #{startTime}
+      </if>
+      <if test="endTime!=null">
+        AND  b.create_time = #{endTime}
+      </if>
+  </select>
+  <select id="selectBlogByBlogId" parameterType="java.lang.Integer" resultType="com.chenzhiheng.vo.BlogVO">
+    SELECT
+    <include refid="Base_Select_BlogVO" />,
+    blog_content as blogContent
+    FROM
+    blog b
+    LEFT JOIN user_info u ON ( b.user_id = u.user_id )
+    where b.blog_id = #{blogId}
+  </select>
+  <select id="selectNewData" resultType="com.chenzhiheng.vo.BlogVO">
+    SELECT
+    <include refid="Base_Select_BlogVO" />,Left(blog_content,105) as blogContent
+    FROM
+    blog b
+    LEFT JOIN user_info u ON ( b.user_id = u.user_id )
+    order by b.create_time desc,(answerNum * 20 + clickNum) desc
+  </select>
+
+  <select id="selectRecommendData" resultType="com.chenzhiheng.vo.BlogVO">
+    SELECT
+    <include refid="Base_Select_BlogVO" />,Left(blog_content,105) as blogContent,
+    if(b.create_time > DATE_SUB(now(),interval 1 WEEK),1,2) as hot
+    FROM
+    blog b
+    LEFT JOIN user_info u ON ( b.user_id = u.user_id )
+    order by hot,(answerNum * 20 + clickNum) desc
+  </select>
+
+  <update id="updateBlogClickByBlogId" parameterType="int" >
+    update blog
+    SET click_num = click_num + #{clickNum}
+    WHERE
+    blog_id = #{blogId}
+  </update>
+
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from blog
+    where blog_id = #{blogId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from blog
+    where blog_id = #{blogId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.chenzhiheng.model.Blog" >
+    insert into blog (blog_id, user_id, blog_title, 
+      blog_content, click_num, create_time, 
+      update_time, blog_status)
+    values (#{blogId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{blogTitle,jdbcType=VARCHAR}, 
+      #{blogContent,jdbcType=VARCHAR}, #{clickNum,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{blogStatus,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.chenzhiheng.model.Blog" >
+    insert into blog
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="blogId != null" >
+        blog_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="blogTitle != null" >
+        blog_title,
+      </if>
+      <if test="blogContent != null" >
+        blog_content,
+      </if>
+      <if test="clickNum != null" >
+        click_num,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="blogStatus != null" >
+        blog_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="blogId != null" >
+        #{blogId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="blogTitle != null" >
+        #{blogTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="blogContent != null" >
+        #{blogContent,jdbcType=VARCHAR},
+      </if>
+      <if test="clickNum != null" >
+        #{clickNum,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="blogStatus != null" >
+        #{blogStatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.chenzhiheng.model.Blog" >
+    update blog
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="blogTitle != null" >
+        blog_title = #{blogTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="blogContent != null" >
+        blog_content = #{blogContent,jdbcType=VARCHAR},
+      </if>
+      <if test="clickNum != null" >
+        click_num = #{clickNum,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="blogStatus != null" >
+        blog_status = #{blogStatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where blog_id = #{blogId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.chenzhiheng.model.Blog" >
+    update blog
+    set user_id = #{userId,jdbcType=INTEGER},
+      blog_title = #{blogTitle,jdbcType=VARCHAR},
+      blog_content = #{blogContent,jdbcType=VARCHAR},
+      click_num = #{clickNum,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      blog_status = #{blogStatus,jdbcType=INTEGER}
+    where blog_id = #{blogId,jdbcType=INTEGER}
+  </update>
+</mapper>

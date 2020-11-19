@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.chenzhiheng.mapper.OperateLogMapper" >
+  <resultMap id="BaseResultMap" type="com.chenzhiheng.model.OperateLog" >
+    <result column="opt_log_id" property="optLogId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="operate_id" property="operateId" jdbcType="INTEGER" />
+    <result column="operate_type" property="operateType" jdbcType="INTEGER" />
+  </resultMap>
+  <insert id="insert" parameterType="com.chenzhiheng.model.OperateLog" >
+    insert into operate_log (opt_log_id, user_id, operate_id, 
+      operate_type)
+    values (#{optLogId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{operateId,jdbcType=INTEGER}, 
+      #{operateType,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.chenzhiheng.model.OperateLog" >
+    insert into operate_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="optLogId != null" >
+        opt_log_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="operateId != null" >
+        operate_id,
+      </if>
+      <if test="operateType != null" >
+        operate_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="optLogId != null" >
+        #{optLogId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="operateId != null" >
+        #{operateId,jdbcType=INTEGER},
+      </if>
+      <if test="operateType != null" >
+        #{operateType,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+</mapper>

@@ -1,0 +1,59 @@
+.article-wrap {
+    
+}
+
+.article-title {
+    margin: 12px 0 13px;
+    height: 60px;
+    line-height: 60px;
+    font-size: 24px;
+}
+.form-group {
+    position: relative;
+}
+.form-group .needed {
+    color: #ff9600;
+    font-size: 18px;
+    position: absolute;
+    left: -18px;
+    top: 21px;
+}
+
+.form-group .form-ipt-wrap, .modal, .modal-open, .wmd-wrap {
+    overflow: hidden;
+}
+.form-group .art-title {
+    width: 100%;
+    box-sizing: border-box;
+    height: 60px;
+    line-height: 60px;
+    border: 1px solid #d0d6d9;
+    padding: 0 10px;
+    font-size: 18px;
+    font-family: "Microsoft YaHei";
+}
+.tag-selector {
+    font-size: 14px;
+    color: #787d82;
+}
+.tag-selector .needed {
+    top: 4px;
+}
+.tag-selector .tip {
+    line-height: 25px;
+    margin-bottom: 6px;
+}
+.tag-selector .tag-box span {
+    cursor: pointer;
+    float: left;
+    padding: 0 9px;
+    font-size: 14px;
+    line-height: 28px;
+    text-align: center;
+    margin: 0 5px 5px 0;
+    border: 1px solid #d0d6d9;
+}
+.tag-selector .tag-box span.onactive, .tag-selector .tag-box span:hover {
+    color: #f01414;
+    border-color: #f01414;
+}
