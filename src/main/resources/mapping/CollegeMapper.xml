@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.chenzhiheng.mapper.CollegeMapper" >
-  <resultMap id="BaseResultMap" type="com.chenzhiheng.model.College" >
+<mapper namespace="com.czh.shishuo.mapper.CollegeMapper" >
+  <resultMap id="BaseResultMap" type="com.czh.shishuo.model.College" >
     <id column="college_id" property="collegeId" jdbcType="INTEGER" />
     <result column="college_name" property="collegeName" jdbcType="VARCHAR" />
     <result column="college_desc" property="collegeDesc" jdbcType="VARCHAR" />
@@ -21,13 +21,13 @@
     delete from college
     where college_id = #{collegeId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.chenzhiheng.model.College" >
+  <insert id="insert" parameterType="com.czh.shishuo.model.College" >
     insert into college (college_id, college_name, college_desc, 
       create_time, update_time)
     values (#{collegeId,jdbcType=INTEGER}, #{collegeName,jdbcType=VARCHAR}, #{collegeDesc,jdbcType=VARCHAR}, 
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.chenzhiheng.model.College" >
+  <insert id="insertSelective" parameterType="com.czh.shishuo.model.College" >
     insert into college
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="collegeId != null" >
@@ -64,7 +64,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.chenzhiheng.model.College" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.czh.shishuo.model.College" >
     update college
     <set >
       <if test="collegeName != null" >
@@ -82,7 +82,7 @@
     </set>
     where college_id = #{collegeId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.chenzhiheng.model.College" >
+  <update id="updateByPrimaryKey" parameterType="com.czh.shishuo.model.College" >
     update college
     set college_name = #{collegeName,jdbcType=VARCHAR},
       college_desc = #{collegeDesc,jdbcType=VARCHAR},

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.chenzhiheng.mapper.FunctionMapper" >
-  <resultMap id="BaseResultMap" type="com.chenzhiheng.model.Function" >
+<mapper namespace="com.czh.shishuo.mapper.FunctionMapper" >
+  <resultMap id="BaseResultMap" type="com.czh.shishuo.model.Function" >
     <id column="function_id" property="functionId" jdbcType="INTEGER" />
     <result column="function_name" property="functionName" jdbcType="VARCHAR" />
     <result column="parent_id" property="parentId" jdbcType="INTEGER" />
@@ -23,7 +23,7 @@
     delete from function
     where function_id = #{functionId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.chenzhiheng.model.Function" >
+  <insert id="insert" parameterType="com.czh.shishuo.model.Function" >
     insert into function (function_id, function_name, parent_id, 
       ulr, serial_num, create_time, 
       update_time)
@@ -31,7 +31,7 @@
       #{ulr,jdbcType=VARCHAR}, #{serialNum,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
       #{updateTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.chenzhiheng.model.Function" >
+  <insert id="insertSelective" parameterType="com.czh.shishuo.model.Function" >
     insert into function
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="functionId != null" >
@@ -80,7 +80,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.chenzhiheng.model.Function" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.czh.shishuo.model.Function" >
     update function
     <set >
       <if test="functionName != null" >
@@ -104,7 +104,7 @@
     </set>
     where function_id = #{functionId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.chenzhiheng.model.Function" >
+  <update id="updateByPrimaryKey" parameterType="com.czh.shishuo.model.Function" >
     update function
     set function_name = #{functionName,jdbcType=VARCHAR},
       parent_id = #{parentId,jdbcType=INTEGER},

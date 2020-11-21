@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.chenzhiheng.mapper.OperateMapper" >
-  <resultMap id="BaseResultMap" type="com.chenzhiheng.model.Operate" >
+<mapper namespace="com.czh.shishuo.mapper.OperateMapper" >
+  <resultMap id="BaseResultMap" type="com.czh.shishuo.model.Operate" >
     <id column="operate_id" property="operateId" jdbcType="INTEGER" />
     <result column="operate_name" property="operateName" jdbcType="VARCHAR" />
   </resultMap>
@@ -18,11 +18,11 @@
     delete from operate
     where operate_id = #{operateId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.chenzhiheng.model.Operate" >
+  <insert id="insert" parameterType="com.czh.shishuo.model.Operate" >
     insert into operate (operate_id, operate_name)
     values (#{operateId,jdbcType=INTEGER}, #{operateName,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.chenzhiheng.model.Operate" >
+  <insert id="insertSelective" parameterType="com.czh.shishuo.model.Operate" >
     insert into operate
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="operateId != null" >
@@ -41,7 +41,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.chenzhiheng.model.Operate" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.czh.shishuo.model.Operate" >
     update operate
     <set >
       <if test="operateName != null" >
@@ -50,7 +50,7 @@
     </set>
     where operate_id = #{operateId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.chenzhiheng.model.Operate" >
+  <update id="updateByPrimaryKey" parameterType="com.czh.shishuo.model.Operate" >
     update operate
     set operate_name = #{operateName,jdbcType=VARCHAR}
     where operate_id = #{operateId,jdbcType=INTEGER}

@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.chenzhiheng.mapper.NoticeMapper">
-  <resultMap id="BaseResultMap" type="com.chenzhiheng.model.Notice">
+<mapper namespace="com.czh.shishuo.mapper.NoticeMapper">
+  <resultMap id="BaseResultMap" type="com.czh.shishuo.model.Notice">
     <id column="notice_id" jdbcType="INTEGER" property="noticeId" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="notice_title" jdbcType="VARCHAR" property="noticeTitle" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.chenzhiheng.model.Notice">
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.czh.shishuo.model.Notice">
     <result column="notice_content" jdbcType="LONGVARCHAR" property="noticeContent" />
   </resultMap>
   <sql id="Base_Column_List">
@@ -45,7 +45,7 @@
     delete from notice
     where notice_id = #{noticeId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.chenzhiheng.model.Notice">
+  <insert id="insert" parameterType="com.czh.shishuo.model.Notice">
     insert into notice (notice_id, user_id, notice_title, 
       create_time, update_time, notice_content
       )
@@ -53,7 +53,7 @@
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{noticeContent,jdbcType=LONGVARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.chenzhiheng.model.Notice">
+  <insert id="insertSelective" parameterType="com.czh.shishuo.model.Notice">
     insert into notice
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="noticeId != null">
@@ -96,7 +96,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.chenzhiheng.model.Notice">
+  <update id="updateByPrimaryKeySelective" parameterType="com.czh.shishuo.model.Notice">
     update notice
     <set>
       <if test="userId != null">
@@ -117,7 +117,7 @@
     </set>
     where notice_id = #{noticeId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.chenzhiheng.model.Notice">
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.czh.shishuo.model.Notice">
     update notice
     set user_id = #{userId,jdbcType=INTEGER},
       notice_title = #{noticeTitle,jdbcType=VARCHAR},
@@ -126,7 +126,7 @@
       notice_content = #{noticeContent,jdbcType=LONGVARCHAR}
     where notice_id = #{noticeId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.chenzhiheng.model.Notice">
+  <update id="updateByPrimaryKey" parameterType="com.czh.shishuo.model.Notice">
     update notice
     set user_id = #{userId,jdbcType=INTEGER},
       notice_title = #{noticeTitle,jdbcType=VARCHAR},

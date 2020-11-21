@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.chenzhiheng.mapper.QuestionReplyMapper">
-  <resultMap id="BaseResultMap" type="com.chenzhiheng.model.QuestionReply">
+<mapper namespace="com.czh.shishuo.mapper.QuestionReplyMapper">
+  <resultMap id="BaseResultMap" type="com.czh.shishuo.model.QuestionReply">
     <id column="qust_reply_id" jdbcType="INTEGER" property="qustReplyId" />
     <result column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="parent_id" jdbcType="INTEGER" property="parentId" />
@@ -13,7 +13,7 @@
   <sql id="Base_Column_List">
     qust_reply_id, user_id, parent_id, repley_content, create_time, reply_status, question_id
   </sql>
-  <select id="selectQuestionReplyByParentId" parameterType="java.lang.Integer" resultType="com.chenzhiheng.vo.QuestionReplyVO">
+  <select id="selectQuestionReplyByParentId" parameterType="java.lang.Integer" resultType="com.czh.shishuo.vo.QuestionReplyVO">
     SELECT
     qust_reply_id AS  qustReplyId,
     question_reply.user_id AS userId,
@@ -31,7 +31,7 @@
     ORDER BY
     question_reply.create_time
   </select>
-  <select id="selectByQuestionId" parameterType="java.lang.Integer" resultType="com.chenzhiheng.vo.QuestionReplyVO">
+  <select id="selectByQuestionId" parameterType="java.lang.Integer" resultType="com.czh.shishuo.vo.QuestionReplyVO">
     SELECT
         qust_reply_id AS  qustReplyId,
         question_reply.user_id AS userId,
@@ -60,7 +60,7 @@
     delete from question_reply
     where qust_reply_id = #{qustReplyId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.chenzhiheng.model.QuestionReply">
+  <insert id="insert" parameterType="com.czh.shishuo.model.QuestionReply">
     insert into question_reply (qust_reply_id, user_id, parent_id, 
       repley_content, create_time, reply_status, 
       question_id)
@@ -68,7 +68,7 @@
       #{repleyContent,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{replyStatus,jdbcType=INTEGER}, 
       #{questionId,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.chenzhiheng.model.QuestionReply">
+  <insert id="insertSelective" parameterType="com.czh.shishuo.model.QuestionReply">
     insert into question_reply
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="qustReplyId != null">
@@ -117,7 +117,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.chenzhiheng.model.QuestionReply">
+  <update id="updateByPrimaryKeySelective" parameterType="com.czh.shishuo.model.QuestionReply">
     update question_reply
     <set>
       <if test="userId != null">
@@ -141,7 +141,7 @@
     </set>
     where qust_reply_id = #{qustReplyId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.chenzhiheng.model.QuestionReply">
+  <update id="updateByPrimaryKey" parameterType="com.czh.shishuo.model.QuestionReply">
     update question_reply
     set user_id = #{userId,jdbcType=INTEGER},
       parent_id = #{parentId,jdbcType=INTEGER},

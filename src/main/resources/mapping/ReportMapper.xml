@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.chenzhiheng.mapper.ReportMapper">
-  <resultMap id="BaseResultMap" type="com.chenzhiheng.model.Report">
+<mapper namespace="com.czh.shishuo.mapper.ReportMapper">
+  <resultMap id="BaseResultMap" type="com.czh.shishuo.model.Report">
     <id column="report_id" jdbcType="INTEGER" property="reportId" />
     <result column="reported_id" jdbcType="INTEGER" property="reportedId" />
     <result column="reported_user_id" jdbcType="INTEGER" property="reportedUserId" />
@@ -17,7 +17,7 @@
     report_id, reported_id, reported_user_id, reported_reply_id, reported_type, report_desc, 
     complain_user_id, create_time, update_time, report_status
   </sql>
-  <select id="selectAllByType" parameterType="java.lang.Integer" resultType="com.chenzhiheng.vo.ReportVO">
+  <select id="selectAllByType" parameterType="java.lang.Integer" resultType="com.czh.shishuo.vo.ReportVO">
     SELECT
     report.report_id as reportId,
     (
@@ -53,7 +53,7 @@
     delete from report
     where report_id = #{reportId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.chenzhiheng.model.Report">
+  <insert id="insert" parameterType="com.czh.shishuo.model.Report">
     insert into report (report_id, reported_id, reported_user_id, 
       reported_reply_id, reported_type, report_desc, 
       complain_user_id, create_time, update_time, 
@@ -63,7 +63,7 @@
       #{complainUserId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
       #{reportStatus,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.chenzhiheng.model.Report">
+  <insert id="insertSelective" parameterType="com.czh.shishuo.model.Report">
     insert into report
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="reportId != null">
@@ -130,7 +130,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.chenzhiheng.model.Report">
+  <update id="updateByPrimaryKeySelective" parameterType="com.czh.shishuo.model.Report">
     update report
     <set>
       <if test="reportedId != null">
@@ -163,7 +163,7 @@
     </set>
     where report_id = #{reportId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.chenzhiheng.model.Report">
+  <update id="updateByPrimaryKey" parameterType="com.czh.shishuo.model.Report">
     update report
     set reported_id = #{reportedId,jdbcType=INTEGER},
       reported_user_id = #{reportedUserId,jdbcType=INTEGER},

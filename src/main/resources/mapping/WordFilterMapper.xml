@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.chenzhiheng.mapper.WordFilterMapper" >
-  <resultMap id="BaseResultMap" type="com.chenzhiheng.model.WordFilter" >
+<mapper namespace="com.czh.shishuo.mapper.WordFilterMapper" >
+  <resultMap id="BaseResultMap" type="com.czh.shishuo.model.WordFilter" >
     <result column="word_filter_id" property="wordFilterId" jdbcType="INTEGER" />
     <result column="key_word" property="keyWord" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
   </resultMap>
-  <insert id="insert" parameterType="com.chenzhiheng.model.WordFilter" >
+  <insert id="insert" parameterType="com.czh.shishuo.model.WordFilter" >
     insert into word_filter (word_filter_id, key_word, create_time
       )
     values (#{wordFilterId,jdbcType=INTEGER}, #{keyWord,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.chenzhiheng.model.WordFilter" >
+  <insert id="insertSelective" parameterType="com.czh.shishuo.model.WordFilter" >
     insert into word_filter
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="wordFilterId != null" >

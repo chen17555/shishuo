@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.chenzhiheng.mapper.RptReportTypeMapper" >
-  <resultMap id="BaseResultMap" type="com.chenzhiheng.model.RptReportTypeKey" >
+<mapper namespace="com.czh.shishuo.mapper.RptReportTypeMapper" >
+  <resultMap id="BaseResultMap" type="com.czh.shishuo.model.RptReportTypeKey" >
     <id column="report_id" property="reportId" jdbcType="INTEGER" />
     <id column="report_type_id" property="reportTypeId" jdbcType="INTEGER" />
   </resultMap>
-  <delete id="deleteByPrimaryKey" parameterType="com.chenzhiheng.model.RptReportTypeKey" >
+  <delete id="deleteByPrimaryKey" parameterType="com.czh.shishuo.model.RptReportTypeKey" >
     delete from rpt_report_type
     where report_id = #{reportId,jdbcType=INTEGER}
       and report_type_id = #{reportTypeId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.chenzhiheng.model.RptReportTypeKey" >
+  <insert id="insert" parameterType="com.czh.shishuo.model.RptReportTypeKey" >
     insert into rpt_report_type (report_id, report_type_id)
     values (#{reportId,jdbcType=INTEGER}, #{reportTypeId,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.chenzhiheng.model.RptReportTypeKey" >
+  <insert id="insertSelective" parameterType="com.czh.shishuo.model.RptReportTypeKey" >
     insert into rpt_report_type
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="reportId != null" >

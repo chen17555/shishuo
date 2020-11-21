@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.chenzhiheng.mapper.UserMapper">
-  <resultMap id="BaseResultMap" type="com.chenzhiheng.model.User">
+<mapper namespace="com.czh.shishuo.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.czh.shishuo.model.User">
     <id column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="user_name" jdbcType="VARCHAR" property="userName" />
     <result column="user_pwd" jdbcType="VARCHAR" property="userPwd" />
@@ -13,7 +13,7 @@
   <sql id="Base_Column_List">
     user_id, user_name, user_pwd, qq_openId, user_status, create_time, update_time
   </sql>
-  <select id="selectAll" resultType="com.chenzhiheng.vo.UserVO">
+  <select id="selectAll" resultType="com.czh.shishuo.vo.UserVO">
     SELECT
     USER.user_id AS userId,
     user_avatar AS userAvatar,
@@ -39,7 +39,7 @@
     delete from user
     where user_id = #{userId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.chenzhiheng.model.User">
+  <insert id="insert" parameterType="com.czh.shishuo.model.User">
     insert into user (user_id, user_name, user_pwd, 
       qq_openId, user_status, create_time, 
       update_time)
@@ -47,7 +47,7 @@
       #{qqOpenid,jdbcType=VARCHAR}, #{userStatus,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
       #{updateTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.chenzhiheng.model.User">
+  <insert id="insertSelective" parameterType="com.czh.shishuo.model.User">
     insert into user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="userId != null">
@@ -96,7 +96,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.chenzhiheng.model.User">
+  <update id="updateByPrimaryKeySelective" parameterType="com.czh.shishuo.model.User">
     update user
     <set>
       <if test="userName != null">
@@ -120,7 +120,7 @@
     </set>
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.chenzhiheng.model.User">
+  <update id="updateByPrimaryKey" parameterType="com.czh.shishuo.model.User">
     update user
     set user_name = #{userName,jdbcType=VARCHAR},
       user_pwd = #{userPwd,jdbcType=VARCHAR},

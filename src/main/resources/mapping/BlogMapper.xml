@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.chenzhiheng.mapper.BlogMapper" >
-  <resultMap id="BaseResultMap" type="com.chenzhiheng.model.Blog" >
+<mapper namespace="com.czh.shishuo.mapper.BlogMapper" >
+  <resultMap id="BaseResultMap" type="com.czh.shishuo.model.Blog" >
     <id column="blog_id" property="blogId" jdbcType="INTEGER" />
     <result column="user_id" property="userId" jdbcType="INTEGER" />
     <result column="blog_title" property="blogTitle" jdbcType="VARCHAR" />
@@ -34,7 +34,7 @@
     blog_tag.blog_id = b.blog_id
     ) AS tags
   </sql>
-  <select id="selectQuestionListByUserIdOrTitleOrTime" resultType="com.chenzhiheng.vo.BlogVO">
+  <select id="selectQuestionListByUserIdOrTitleOrTime" resultType="com.czh.shishuo.vo.BlogVO">
     SELECT
       <include refid="Base_Select_BlogVO" />,
       Left(blog_content,105) as blogContent
@@ -56,7 +56,7 @@
         AND  b.create_time = #{endTime}
       </if>
   </select>
-  <select id="selectBlogByBlogId" parameterType="java.lang.Integer" resultType="com.chenzhiheng.vo.BlogVO">
+  <select id="selectBlogByBlogId" parameterType="java.lang.Integer" resultType="com.czh.shishuo.vo.BlogVO">
     SELECT
     <include refid="Base_Select_BlogVO" />,
     blog_content as blogContent
@@ -65,7 +65,7 @@
     LEFT JOIN user_info u ON ( b.user_id = u.user_id )
     where b.blog_id = #{blogId}
   </select>
-  <select id="selectNewData" resultType="com.chenzhiheng.vo.BlogVO">
+  <select id="selectNewData" resultType="com.czh.shishuo.vo.BlogVO">
     SELECT
     <include refid="Base_Select_BlogVO" />,Left(blog_content,105) as blogContent
     FROM
@@ -74,7 +74,7 @@
     order by b.create_time desc,(answerNum * 20 + clickNum) desc
   </select>
 
-  <select id="selectRecommendData" resultType="com.chenzhiheng.vo.BlogVO">
+  <select id="selectRecommendData" resultType="com.czh.shishuo.vo.BlogVO">
     SELECT
     <include refid="Base_Select_BlogVO" />,Left(blog_content,105) as blogContent,
     if(b.create_time > DATE_SUB(now(),interval 1 WEEK),1,2) as hot
@@ -102,7 +102,7 @@
     delete from blog
     where blog_id = #{blogId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.chenzhiheng.model.Blog" >
+  <insert id="insert" parameterType="com.czh.shishuo.model.Blog" >
     insert into blog (blog_id, user_id, blog_title, 
       blog_content, click_num, create_time, 
       update_time, blog_status)
@@ -110,7 +110,7 @@
       #{blogContent,jdbcType=VARCHAR}, #{clickNum,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
       #{updateTime,jdbcType=TIMESTAMP}, #{blogStatus,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.chenzhiheng.model.Blog" >
+  <insert id="insertSelective" parameterType="com.czh.shishuo.model.Blog" >
     insert into blog
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="blogId != null" >
@@ -165,7 +165,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.chenzhiheng.model.Blog" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.czh.shishuo.model.Blog" >
     update blog
     <set >
       <if test="userId != null" >
@@ -192,7 +192,7 @@
     </set>
     where blog_id = #{blogId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.chenzhiheng.model.Blog" >
+  <update id="updateByPrimaryKey" parameterType="com.czh.shishuo.model.Blog" >
     update blog
     set user_id = #{userId,jdbcType=INTEGER},
       blog_title = #{blogTitle,jdbcType=VARCHAR},

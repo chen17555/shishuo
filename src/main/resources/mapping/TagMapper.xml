@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.chenzhiheng.mapper.TagMapper">
-  <resultMap id="BaseResultMap" type="com.chenzhiheng.model.Tag">
+<mapper namespace="com.czh.shishuo.mapper.TagMapper">
+  <resultMap id="BaseResultMap" type="com.czh.shishuo.model.Tag">
     <id column="tag_id" jdbcType="INTEGER" property="tagId" />
     <result column="tag_name" jdbcType="VARCHAR" property="tagName" />
     <result column="tag_img" jdbcType="VARCHAR" property="tagImg" />
@@ -51,7 +51,7 @@
     delete from tag
     where tag_id = #{tagId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.chenzhiheng.model.Tag">
+  <insert id="insert" parameterType="com.czh.shishuo.model.Tag">
     insert into tag (tag_id, tag_name, tag_img, 
       tag_desc, create_time, update_time
       )
@@ -59,7 +59,7 @@
       #{tagDesc,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.chenzhiheng.model.Tag">
+  <insert id="insertSelective" parameterType="com.czh.shishuo.model.Tag">
     insert into tag
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="tagId != null">
@@ -102,7 +102,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.chenzhiheng.model.Tag">
+  <update id="updateByPrimaryKeySelective" parameterType="com.czh.shishuo.model.Tag">
     update tag
     <set>
       <if test="tagName != null">
@@ -123,7 +123,7 @@
     </set>
     where tag_id = #{tagId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.chenzhiheng.model.Tag">
+  <update id="updateByPrimaryKey" parameterType="com.czh.shishuo.model.Tag">
     update tag
     set tag_name = #{tagName,jdbcType=VARCHAR},
       tag_img = #{tagImg,jdbcType=VARCHAR},

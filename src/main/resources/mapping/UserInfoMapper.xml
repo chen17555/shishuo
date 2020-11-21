@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.chenzhiheng.mapper.UserInfoMapper">
-  <resultMap id="BaseResultMap" type="com.chenzhiheng.model.UserInfo">
+<mapper namespace="com.czh.shishuo.mapper.UserInfoMapper">
+  <resultMap id="BaseResultMap" type="com.czh.shishuo.model.UserInfo">
     <id column="user_id" jdbcType="INTEGER" property="userId" />
     <result column="user_age" jdbcType="INTEGER" property="userAge" />
     <result column="user_sex" jdbcType="BIT" property="userSex" />
@@ -27,7 +27,7 @@
     delete from user_info
     where user_id = #{userId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.chenzhiheng.model.UserInfo">
+  <insert id="insert" parameterType="com.czh.shishuo.model.UserInfo">
     insert into user_info (user_id, user_age, user_sex, 
       user_email, user_phone, user_nickname, 
       user_desc, update_time, user_avatar, 
@@ -37,7 +37,7 @@
       #{userDesc,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, #{userAvatar,jdbcType=VARCHAR}, 
       #{createTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.chenzhiheng.model.UserInfo">
+  <insert id="insertSelective" parameterType="com.czh.shishuo.model.UserInfo">
     insert into user_info
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="userId != null">
@@ -104,7 +104,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.chenzhiheng.model.UserInfo">
+  <update id="updateByPrimaryKeySelective" parameterType="com.czh.shishuo.model.UserInfo">
     update user_info
     <set>
       <if test="userAge != null">
@@ -137,7 +137,7 @@
     </set>
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.chenzhiheng.model.UserInfo">
+  <update id="updateByPrimaryKey" parameterType="com.czh.shishuo.model.UserInfo">
     update user_info
     set user_age = #{userAge,jdbcType=INTEGER},
       user_sex = #{userSex,jdbcType=BIT},

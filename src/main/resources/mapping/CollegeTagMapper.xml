@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.chenzhiheng.mapper.CollegeTagMapper" >
-  <resultMap id="BaseResultMap" type="com.chenzhiheng.model.CollegeTag" >
+<mapper namespace="com.czh.shishuo.mapper.CollegeTagMapper" >
+  <resultMap id="BaseResultMap" type="com.czh.shishuo.model.CollegeTag" >
     <id column="tag_id" property="tagId" jdbcType="INTEGER" />
     <id column="college_id" property="collegeId" jdbcType="INTEGER" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
@@ -9,25 +9,25 @@
   <sql id="Base_Column_List" >
     tag_id, college_id, create_time
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.chenzhiheng.model.CollegeTagKey" >
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.czh.shishuo.model.CollegeTagKey" >
     select 
     <include refid="Base_Column_List" />
     from college_tag
     where tag_id = #{tagId,jdbcType=INTEGER}
       and college_id = #{collegeId,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="com.chenzhiheng.model.CollegeTagKey" >
+  <delete id="deleteByPrimaryKey" parameterType="com.czh.shishuo.model.CollegeTagKey" >
     delete from college_tag
     where tag_id = #{tagId,jdbcType=INTEGER}
       and college_id = #{collegeId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.chenzhiheng.model.CollegeTag" >
+  <insert id="insert" parameterType="com.czh.shishuo.model.CollegeTag" >
     insert into college_tag (tag_id, college_id, create_time
       )
     values (#{tagId,jdbcType=INTEGER}, #{collegeId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.chenzhiheng.model.CollegeTag" >
+  <insert id="insertSelective" parameterType="com.czh.shishuo.model.CollegeTag" >
     insert into college_tag
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="tagId != null" >
@@ -52,7 +52,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.chenzhiheng.model.CollegeTag" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.czh.shishuo.model.CollegeTag" >
     update college_tag
     <set >
       <if test="createTime != null" >
@@ -62,7 +62,7 @@
     where tag_id = #{tagId,jdbcType=INTEGER}
       and college_id = #{collegeId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.chenzhiheng.model.CollegeTag" >
+  <update id="updateByPrimaryKey" parameterType="com.czh.shishuo.model.CollegeTag" >
     update college_tag
     set create_time = #{createTime,jdbcType=TIMESTAMP}
     where tag_id = #{tagId,jdbcType=INTEGER}

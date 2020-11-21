@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.chenzhiheng.mapper.QuestionMapper" >
-  <resultMap id="BaseResultMap" type="com.chenzhiheng.model.Question" >
+<mapper namespace="com.czh.shishuo.mapper.QuestionMapper" >
+  <resultMap id="BaseResultMap" type="com.czh.shishuo.model.Question" >
     <id column="question_id" property="questionId" jdbcType="INTEGER" />
     <result column="user_id" property="userId" jdbcType="INTEGER" />
     <result column="question_title" property="questionTitle" jdbcType="VARCHAR" />
@@ -44,7 +44,7 @@
     ) AS questionTagImg
   </sql>
 
-  <select id="selectQuestionListByUserCollect" resultType="com.chenzhiheng.vo.QuestionVO" parameterType="java.lang.Integer">
+  <select id="selectQuestionListByUserCollect" resultType="com.czh.shishuo.vo.QuestionVO" parameterType="java.lang.Integer">
     SELECT
     <include refid="Base_Select_QuestionVO"/>
     FROM
@@ -54,7 +54,7 @@
     WHERE  ucq.user_id = #{userId}
   </select>
 
-  <select id="selectQuestionListByReplyUserId" resultType="com.chenzhiheng.vo.QuestionVO" parameterType="java.lang.Integer">
+  <select id="selectQuestionListByReplyUserId" resultType="com.czh.shishuo.vo.QuestionVO" parameterType="java.lang.Integer">
     SELECT
     <include refid="Base_Select_QuestionVO"/>
     FROM
@@ -64,7 +64,7 @@
     WHERE  qr.user_id = #{userId}
   </select>
 
-  <select id="selectQuestionListByUserId" resultType="com.chenzhiheng.vo.QuestionVO" parameterType="java.lang.Integer">
+  <select id="selectQuestionListByUserId" resultType="com.czh.shishuo.vo.QuestionVO" parameterType="java.lang.Integer">
     SELECT
     <include refid="Base_Select_QuestionVO"/>
     FROM
@@ -72,7 +72,7 @@
     LEFT JOIN user_info u ON ( q.user_id = u.user_id )
     WHERE  q.user_id = #{userId}
   </select>
-  <select id="selectNewDataByTag" resultType="com.chenzhiheng.vo.QuestionVO" parameterType="java.lang.Integer">
+  <select id="selectNewDataByTag" resultType="com.czh.shishuo.vo.QuestionVO" parameterType="java.lang.Integer">
     SELECT
     <include refid="Base_Select_QuestionVO"/>
     FROM
@@ -83,7 +83,7 @@
       #{tagId} IN (question_tag.tag_id)
     ORDER BY q.create_time DESC
   </select>
-  <select id="selectNewPage" resultType="com.chenzhiheng.vo.QuestionVO" parameterType="java.lang.Integer">
+  <select id="selectNewPage" resultType="com.czh.shishuo.vo.QuestionVO" parameterType="java.lang.Integer">
     SELECT
     <include refid="Base_Select_QuestionVO"/>
     FROM
@@ -92,7 +92,7 @@
     ORDER BY q.create_time DESC
   </select>
 
-  <select id="selectRecommendDataByTag" resultType="com.chenzhiheng.vo.QuestionVO" parameterType="java.lang.Integer">
+  <select id="selectRecommendDataByTag" resultType="com.czh.shishuo.vo.QuestionVO" parameterType="java.lang.Integer">
     SELECT
     <include refid="Base_Select_QuestionVO"/>,
     if(q.create_time > DATE_SUB(now(),interval 1 WEEK),1,2) as hot
@@ -104,7 +104,7 @@
     #{tagId} IN (question_tag.tag_id)
     ORDER BY hot,(answerNum * 5 + clickNum) DESC
   </select>
-  <select id="selectQuestionList" resultType="com.chenzhiheng.vo.QuestionVO">
+  <select id="selectQuestionList" resultType="com.czh.shishuo.vo.QuestionVO">
     SELECT
     q.question_id AS questionId,
     q.question_title AS questionTitle,
@@ -125,7 +125,7 @@
     WHERE q.question_status != 0
   </select>
 
-  <select id="selectQuestionRecoveryList" resultType="com.chenzhiheng.vo.QuestionVO">
+  <select id="selectQuestionRecoveryList" resultType="com.czh.shishuo.vo.QuestionVO">
     SELECT
     q.question_id AS questionId,
     q.question_title AS questionTitle,
@@ -145,7 +145,7 @@
     LEFT JOIN user_info u ON ( q.user_id = u.user_id )
     WHERE q.question_status = 0
   </select>
-  <select id="selectRecommendPage" resultType="com.chenzhiheng.vo.QuestionVO" parameterType="java.lang.Integer">
+  <select id="selectRecommendPage" resultType="com.czh.shishuo.vo.QuestionVO" parameterType="java.lang.Integer">
     SELECT
     <include refid="Base_Select_QuestionVO"/>,
     if(q.create_time > DATE_SUB(now(),interval 1 WEEK),1,2) as hot
@@ -157,7 +157,7 @@
 
   </select>
 
-  <select id="selectQuestionVoByQuestionId" resultType="com.chenzhiheng.vo.QuestionVO" parameterType="java.lang.Integer">
+  <select id="selectQuestionVoByQuestionId" resultType="com.czh.shishuo.vo.QuestionVO" parameterType="java.lang.Integer">
     SELECT
     <include refid="Base_Select_QuestionVO"/>,
     u.user_avatar AS authorAvatar
@@ -188,7 +188,7 @@
     delete from question
     where question_id = #{questionId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.chenzhiheng.model.Question" >
+  <insert id="insert" parameterType="com.czh.shishuo.model.Question" >
     insert into question (question_id, user_id, question_title, 
       question_content, create_time, update_time, 
       click_num, question_status)
@@ -196,7 +196,7 @@
       #{questionContent,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
       #{clickNum,jdbcType=INTEGER}, #{questionStatus,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.chenzhiheng.model.Question" >
+  <insert id="insertSelective" parameterType="com.czh.shishuo.model.Question" >
     insert into question
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="questionId != null" >
@@ -251,7 +251,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.chenzhiheng.model.Question" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.czh.shishuo.model.Question" >
     update question
     <set >
       <if test="userId != null" >
@@ -278,7 +278,7 @@
     </set>
     where question_id = #{questionId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.chenzhiheng.model.Question" >
+  <update id="updateByPrimaryKey" parameterType="com.czh.shishuo.model.Question" >
     update question
     set user_id = #{userId,jdbcType=INTEGER},
       question_title = #{questionTitle,jdbcType=VARCHAR},
