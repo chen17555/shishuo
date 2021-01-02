@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.czh.shishuo.admin.dao.CollegeReportMapper" >
+  <resultMap id="BaseResultMap" type="com.czh.shishuo.model.CollegeReportKey" >
+    <id column="college_id" property="collegeId" jdbcType="INTEGER" />
+    <id column="report_id" property="reportId" jdbcType="INTEGER" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="com.czh.shishuo.model.CollegeReportKey" >
+    delete from college_report
+    where college_id = #{collegeId,jdbcType=INTEGER}
+      and report_id = #{reportId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.czh.shishuo.model.CollegeReportKey" >
+    insert into college_report (college_id, report_id)
+    values (#{collegeId,jdbcType=INTEGER}, #{reportId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.czh.shishuo.model.CollegeReportKey" >
+    insert into college_report
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="collegeId != null" >
+        college_id,
+      </if>
+      <if test="reportId != null" >
+        report_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="collegeId != null" >
+        #{collegeId,jdbcType=INTEGER},
+      </if>
+      <if test="reportId != null" >
+        #{reportId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+</mapper>

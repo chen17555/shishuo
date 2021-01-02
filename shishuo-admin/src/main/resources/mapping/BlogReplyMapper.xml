@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.czh.shishuo.admin.dao.BlogReplyMapper">
+  <resultMap id="BaseResultMap" type="com.czh.shishuo.model.BlogReply">
+    <id column="blog_reply_id" jdbcType="INTEGER" property="blogReplyId" />
+    <result column="blog_id" jdbcType="INTEGER" property="blogId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="parent_id" jdbcType="INTEGER" property="parentId" />
+    <result column="reply_content" jdbcType="VARCHAR" property="replyContent" />
+    <result column="reply_status" jdbcType="INTEGER" property="replyStatus" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="updata_time" jdbcType="TIMESTAMP" property="updataTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    blog_reply_id, blog_id, user_id, parent_id, reply_content, reply_status, create_time, 
+    updata_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from blog_reply
+    where blog_reply_id = #{blogReplyId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from blog_reply
+    where blog_reply_id = #{blogReplyId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.czh.shishuo.model.BlogReply">
+    insert into blog_reply (blog_reply_id, blog_id, user_id, 
+      parent_id, reply_content, reply_status, 
+      create_time, updata_time)
+    values (#{blogReplyId,jdbcType=INTEGER}, #{blogId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
+      #{parentId,jdbcType=INTEGER}, #{replyContent,jdbcType=VARCHAR}, #{replyStatus,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updataTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.czh.shishuo.model.BlogReply">
+    insert into blog_reply
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="blogReplyId != null">
+        blog_reply_id,
+      </if>
+      <if test="blogId != null">
+        blog_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="parentId != null">
+        parent_id,
+      </if>
+      <if test="replyContent != null">
+        reply_content,
+      </if>
+      <if test="replyStatus != null">
+        reply_status,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updataTime != null">
+        updata_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="blogReplyId != null">
+        #{blogReplyId,jdbcType=INTEGER},
+      </if>
+      <if test="blogId != null">
+        #{blogId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="replyContent != null">
+        #{replyContent,jdbcType=VARCHAR},
+      </if>
+      <if test="replyStatus != null">
+        #{replyStatus,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updataTime != null">
+        #{updataTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.czh.shishuo.model.BlogReply">
+    update blog_reply
+    <set>
+      <if test="blogId != null">
+        blog_id = #{blogId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="parentId != null">
+        parent_id = #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="replyContent != null">
+        reply_content = #{replyContent,jdbcType=VARCHAR},
+      </if>
+      <if test="replyStatus != null">
+        reply_status = #{replyStatus,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updataTime != null">
+        updata_time = #{updataTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where blog_reply_id = #{blogReplyId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.czh.shishuo.model.BlogReply">
+    update blog_reply
+    set blog_id = #{blogId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      parent_id = #{parentId,jdbcType=INTEGER},
+      reply_content = #{replyContent,jdbcType=VARCHAR},
+      reply_status = #{replyStatus,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      updata_time = #{updataTime,jdbcType=TIMESTAMP}
+    where blog_reply_id = #{blogReplyId,jdbcType=INTEGER}
+  </update>
+</mapper>

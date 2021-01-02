@@ -1,0 +1,82 @@
+.noticesPage {
+    margin-left: auto;
+    margin-right: auto;
+}
+.title-bar {
+    height: 50px;
+    background: #f3f5f7;
+    font-family: "微软雅黑";
+    font-size: 14px;
+    line-height: 50px;
+    color: #93999f;
+    border-top: 1px solid #b7bbbf;
+}
+
+.title-bar a{
+	padding: 0 20px;
+}
+.notice-list {
+    width: 100%;
+}
+.notice-list .notice {
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+    border-bottom: 1px solid #d9dde1;
+    overflow: hidden;
+}
+.notice-list .notice-box {
+    padding: 20px 10px;
+}
+.notice-list .notice .notice-type {
+    width: 46px;
+    height: 30px;
+    border: 1px solid #f01414;
+    background: #fde7e5;
+    color: #f01414;
+    line-height: 30px;
+    text-align: center;
+    margin-right: 20px;
+    font-size: 14px;
+    float: left;
+}
+.notice-list .notice .notice-show-box {
+	width: 100%;
+    float: left;
+    font-family: "微软雅黑";
+}
+.notice-list .notice .notice-show-box .notice-con {
+    color: #4d555d;
+    font-size: 16px;
+    font-family: "微软雅黑";
+    float: left;
+}
+.notice-list .notice .notice-show-box .notice-con a {
+    color: #4d555d;
+    font-weight: 700;
+    font-family: "微软雅黑";
+    padding: 0 5px;
+}
+.notice-list .notice .notice-show-box .notice-date {
+    font-weight: 400;
+    font-size: 14px;
+    color: #93999f;
+    line-height: 30px;
+    float: right;
+}
+.message-center .message-detail-container {
+    padding: 16px 74px;
+    font-size: 14px;
+    line-height: 24px;
+    margin-bottom: 20px;
+}
+.breakall {
+    word-break: break-all;
+    word-wrap: break-word;
+}
+.console-title-border {
+    border-bottom: 1px solid #DDD;
+}
+.margin-top-2 {
+    margin-top: 16px !important;
+}

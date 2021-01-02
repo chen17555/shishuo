@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.czh.shishuo.admin.dao.NoticeMapper">
+  <resultMap id="BaseResultMap" type="com.czh.shishuo.model.Notice">
+    <id column="notice_id" jdbcType="INTEGER" property="noticeId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="notice_title" jdbcType="VARCHAR" property="noticeTitle" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.czh.shishuo.model.Notice">
+    <result column="notice_content" jdbcType="LONGVARCHAR" property="noticeContent" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    notice_id, user_id, notice_title, create_time, update_time
+  </sql>
+  <sql id="Blob_Column_List">
+    notice_content
+  </sql>
+  <select id="selectAll" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from notice
+    ORDER  BY  create_time DESC
+  </select>
+  <select id="selectNoticeById" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from notice
+    where notice_id = #{noticeId,jdbcType=INTEGER}
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from notice
+    where notice_id = #{noticeId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from notice
+    where notice_id = #{noticeId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.czh.shishuo.model.Notice">
+    insert into notice (notice_id, user_id, notice_title, 
+      create_time, update_time, notice_content
+      )
+    values (#{noticeId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{noticeTitle,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{noticeContent,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.czh.shishuo.model.Notice">
+    insert into notice
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="noticeId != null">
+        notice_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="noticeTitle != null">
+        notice_title,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="noticeContent != null">
+        notice_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="noticeId != null">
+        #{noticeId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="noticeTitle != null">
+        #{noticeTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="noticeContent != null">
+        #{noticeContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.czh.shishuo.model.Notice">
+    update notice
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="noticeTitle != null">
+        notice_title = #{noticeTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="noticeContent != null">
+        notice_content = #{noticeContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where notice_id = #{noticeId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.czh.shishuo.model.Notice">
+    update notice
+    set user_id = #{userId,jdbcType=INTEGER},
+      notice_title = #{noticeTitle,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      notice_content = #{noticeContent,jdbcType=LONGVARCHAR}
+    where notice_id = #{noticeId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.czh.shishuo.model.Notice">
+    update notice
+    set user_id = #{userId,jdbcType=INTEGER},
+      notice_title = #{noticeTitle,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where notice_id = #{noticeId,jdbcType=INTEGER}
+  </update>
+</mapper>

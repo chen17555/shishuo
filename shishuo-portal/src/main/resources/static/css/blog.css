@@ -1,0 +1,209 @@
+.ad-create{
+    background: url(../img/creatbg.png) no-repeat;
+    height: 80px;
+    line-height: 80px;
+    margin: 0 0 20px;
+    position: relative;
+}
+.ad-create .icon-close{
+    position: absolute;
+    right: 11px;
+    top: 11px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    color: #787d82;
+}
+.ad-create h3 {
+    font-size: 18px;
+    color: #14191e;
+    font-weight: 700;
+    display: inline-block;
+    padding: 0 20px 0 30px;
+    width: 59.4%;
+}
+.ad-create .create-ques {
+    font-size: 14px;
+    color: #fff;
+    display: inline-block;
+    width: 100px;
+    height: 40px;
+    line-height: 40px;
+    background-color: #f01400;
+    text-align: center;
+}
+.article-tab {
+    margin-top: 20px;
+    padding: 10px 0;
+}
+.article-tab a {
+    display: inline-block;
+    line-height: 30px;
+    margin-right: 10px;
+    padding: 0 10px;
+    font-size: 14px;
+    color: #4d555d;
+    background-color: #f3f5f7;
+}
+.tag-mask, .tag-pop-layer {
+    display: none;
+}
+.article-tool-bar {
+    font-size: 14px;
+    position: relative;
+    margin-top: 13px;
+}
+.article-tool-bar .tool-left a.active {
+    color: #f01414;
+    border-bottom: 2px solid #f01400;
+}
+.article-tool-bar .tool-left a {
+    font-size: 16px;
+    color: #4d555d;
+    margin: 0 49px -1px 0;
+    line-height: 48px;
+    display: inline-block;
+}
+.article-lwrap {
+    border-bottom: 1px solid #d9dde1;
+    overflow: hidden;
+}
+.article-lwrap .item-title {
+    padding: 23px 0 7px;
+}
+.article-lwrap .title-detail {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 24px;
+    color: #14191e;
+}
+.article-lwrap .original {
+    font-size: 12px;
+    color: #71777d;
+    border: 1px solid #71777d;
+    width: 41px;
+    margin-left: 4px;
+    line-height: 22px;
+    text-align: center;
+    display: inline-block;
+    vertical-align: 3px;
+}
+.article-lwrap .item-bd {
+    font-size: 14px;
+    line-height: 28px;
+    color: #787d82;
+    margin-top: -5px;
+}
+.article-lwrap .item-btm {
+    font-size: 14px;
+    color: #93999f;
+    line-height: 19px;
+    padding: 14px 0 25px;
+}
+.article-lwrap .left-info .publisher-name {
+    color: #93999f;
+    font-size: 14px;
+    padding: 0;
+}
+.article-lwrap .right-info span {
+    padding-left: 30px;
+}
+.article-right {
+    margin-bottom: 70px;
+    width: 280px;
+}
+.new-ques{
+    margin-bottom: 30px;
+}
+.new-ques .write-ques {
+    text-align: center;
+    display: block;
+    font-size: 18px;
+    color: #f01400;
+    line-height: 56px;
+    margin-bottom: 20px;
+    border: 2px solid #f01400;
+}
+.new-ques .ques-info {
+    border-bottom: 1px solid #d9dde1;
+    padding-bottom: 22px;
+    position: relative;
+}
+.new-ques .sharer-head {
+    width: 40px;
+    height: 40px;
+    border-radius: 20px;
+    overflow: hidden;
+    background: #ccc;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.new-ques .ques-wrap {
+    background-color: #f5f7f9;
+    padding: 20px 20px 10px;
+    min-height: 140px;
+}
+.new-ques .right-uinfo {
+    padding-left: 56px;
+}
+.new-ques .right-uinfo h3 {
+    width: 180px;
+    line-height: 26px;
+    display: inline-block;
+}
+.new-ques .sharer-name {
+    color: #14191e;
+    font-size: 15px;
+    vertical-align: middle;
+    display: inline-block;
+    max-width: 60%;
+    overflow: hidden;
+}
+.new-ques .num-info {
+    margin-top: 10px;
+}
+.new-ques li {
+    display: inline-block;
+    line-height: 41px;
+    width: 43%;
+}
+.new-ques .num-info a {
+    color: #93999f;
+}
+.new-ques .num-info span {
+    color: #4d555d;
+    margin-left: 10px;
+}
+.other-article {
+    margin-bottom: 20px;
+}
+.other-article h2 {
+    color: #14191e;
+    height: 56px;
+    line-height: 49px;
+    border-bottom: 1px solid #b7bbbf;
+    font-size: 16px;
+    font-weight: 700;
+}
+.other-article li {
+    line-height: 1.5;
+    max-height: 15em;
+    word-break: break-all;
+    border-bottom: 1px solid #d9dde1;
+}
+.other-article h3 {
+    margin-top: 15px;
+    font-size: 16px;
+    color: #14191e;
+    line-height: 24px;
+}
+.other-article .show-box {
+    margin: 5px 0 15px;
+    color: #b5b9bc;
+    font-size: 12px;
+    line-height: 20px;
+}
+.other-article .show-box .spacer {
+    margin-right: 30px;
+}

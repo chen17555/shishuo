@@ -1,0 +1,36 @@
+.toplist{
+	font-size: 12px;
+}
+.toplist .topbox{
+	width: 390px;
+	float: left;
+}
+.toplist .toptitle{
+	text-align: center;
+}
+.toplist ul{
+	width: 356px;
+}
+.toplist ul li{
+	width: 350px;
+	height: 32px;
+	overflow: hidden;
+}
+.bk{
+	padding: 0 15px;
+}
+.fl_tb{
+	width: 100%;
+}
+.fl_tb td{
+	padding: 10px 0;
+}
+.fl_g{
+	vertical-align: top;
+}
+.xw0{
+	font-weight: 400;
+}
+.xi1{
+	color:#F26C4F;
+}

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.czh.shishuo.admin.dao.OperateMapper" >
+  <resultMap id="BaseResultMap" type="com.czh.shishuo.model.Operate" >
+    <id column="operate_id" property="operateId" jdbcType="INTEGER" />
+    <result column="operate_name" property="operateName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    operate_id, operate_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from operate
+    where operate_id = #{operateId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from operate
+    where operate_id = #{operateId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.czh.shishuo.model.Operate" >
+    insert into operate (operate_id, operate_name)
+    values (#{operateId,jdbcType=INTEGER}, #{operateName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.czh.shishuo.model.Operate" >
+    insert into operate
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="operateId != null" >
+        operate_id,
+      </if>
+      <if test="operateName != null" >
+        operate_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="operateId != null" >
+        #{operateId,jdbcType=INTEGER},
+      </if>
+      <if test="operateName != null" >
+        #{operateName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.czh.shishuo.model.Operate" >
+    update operate
+    <set >
+      <if test="operateName != null" >
+        operate_name = #{operateName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where operate_id = #{operateId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.czh.shishuo.model.Operate" >
+    update operate
+    set operate_name = #{operateName,jdbcType=VARCHAR}
+    where operate_id = #{operateId,jdbcType=INTEGER}
+  </update>
+</mapper>

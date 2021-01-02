@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.czh.shishuo.admin.dao.ReportTypeMapper" >
+  <resultMap id="BaseResultMap" type="com.czh.shishuo.model.ReportType" >
+    <id column="report_type_id" property="reportTypeId" jdbcType="INTEGER" />
+    <result column="report_type_name" property="reportTypeName" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    report_type_id, report_type_name, create_time, update_time
+  </sql>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from report_type
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from report_type
+    where report_type_id = #{reportTypeId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from report_type
+    where report_type_id = #{reportTypeId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.czh.shishuo.model.ReportType" >
+    insert into report_type (report_type_id, report_type_name, create_time, 
+      update_time)
+    values (#{reportTypeId,jdbcType=INTEGER}, #{reportTypeName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.czh.shishuo.model.ReportType" >
+    insert into report_type
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="reportTypeId != null" >
+        report_type_id,
+      </if>
+      <if test="reportTypeName != null" >
+        report_type_name,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="reportTypeId != null" >
+        #{reportTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="reportTypeName != null" >
+        #{reportTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.czh.shishuo.model.ReportType" >
+    update report_type
+    <set >
+      <if test="reportTypeName != null" >
+        report_type_name = #{reportTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where report_type_id = #{reportTypeId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.czh.shishuo.model.ReportType" >
+    update report_type
+    set report_type_name = #{reportTypeName,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where report_type_id = #{reportTypeId,jdbcType=INTEGER}
+  </update>
+</mapper>

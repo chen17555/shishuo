@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.czh.shishuo.admin.dao.FunctionMapper" >
+  <resultMap id="BaseResultMap" type="com.czh.shishuo.model.Function" >
+    <id column="function_id" property="functionId" jdbcType="INTEGER" />
+    <result column="function_name" property="functionName" jdbcType="VARCHAR" />
+    <result column="parent_id" property="parentId" jdbcType="INTEGER" />
+    <result column="ulr" property="ulr" jdbcType="VARCHAR" />
+    <result column="serial_num" property="serialNum" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    function_id, function_name, parent_id, ulr, serial_num, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from function
+    where function_id = #{functionId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from function
+    where function_id = #{functionId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.czh.shishuo.model.Function" >
+    insert into function (function_id, function_name, parent_id, 
+      ulr, serial_num, create_time, 
+      update_time)
+    values (#{functionId,jdbcType=INTEGER}, #{functionName,jdbcType=VARCHAR}, #{parentId,jdbcType=INTEGER}, 
+      #{ulr,jdbcType=VARCHAR}, #{serialNum,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.czh.shishuo.model.Function" >
+    insert into function
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="functionId != null" >
+        function_id,
+      </if>
+      <if test="functionName != null" >
+        function_name,
+      </if>
+      <if test="parentId != null" >
+        parent_id,
+      </if>
+      <if test="ulr != null" >
+        ulr,
+      </if>
+      <if test="serialNum != null" >
+        serial_num,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="functionId != null" >
+        #{functionId,jdbcType=INTEGER},
+      </if>
+      <if test="functionName != null" >
+        #{functionName,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="ulr != null" >
+        #{ulr,jdbcType=VARCHAR},
+      </if>
+      <if test="serialNum != null" >
+        #{serialNum,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.czh.shishuo.model.Function" >
+    update function
+    <set >
+      <if test="functionName != null" >
+        function_name = #{functionName,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="ulr != null" >
+        ulr = #{ulr,jdbcType=VARCHAR},
+      </if>
+      <if test="serialNum != null" >
+        serial_num = #{serialNum,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where function_id = #{functionId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.czh.shishuo.model.Function" >
+    update function
+    set function_name = #{functionName,jdbcType=VARCHAR},
+      parent_id = #{parentId,jdbcType=INTEGER},
+      ulr = #{ulr,jdbcType=VARCHAR},
+      serial_num = #{serialNum,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where function_id = #{functionId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,72 @@
+.current-label {
+	margin-top: -20px;
+    background-color: #edf1f2;
+    padding: 40px 0;
+}
+.current-label img {
+    display: block;
+    width: 102px;
+    height: 102px;
+    margin: 0 auto;
+    border-radius: 51px;
+    overflow: hidden;
+    border: 0;
+}
+.current-label h3 {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 26px;
+    color: #14191e;
+    margin: 10px 0;
+}
+.current-label .content {
+    font-size: 14px;
+    color: #787d82;
+    line-height: 28px;
+    text-align: center;
+    width: 610px;
+    margin: 0 auto 4px;
+    height: 28px;
+    overflow: hidden;
+}
+.current-label .show {
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    margin: 0 auto;
+    cursor: pointer;
+}
+.current-label .show i {
+    font-size: 24px;
+    color: #b6bdc1;
+}
+.current-label .follow {
+    width: 60px;
+    height: 30px;
+    margin: 10px auto 0;
+    line-height: 30px;
+    font-size: 14px;
+    color: #fff;
+    text-align: center;
+    cursor: pointer;
+    background-color: #F01400;
+}
+.custom-content .btnbox, .quiz a, .tag-pop .save-btn {
+    text-align: center;
+}
+.quiz a, .quiz a:hover {
+    background-color: #f01400;
+    color: #fff;
+}
+.my-follow-class, .quiz a, .user-about {
+    margin-bottom: 30px;
+}
+.quiz a {
+    display: block;
+    font-size: 18px;
+    height: 56px;
+    line-height: 56px;
+    border: 2px solid #f01400;
+    cursor: pointer;
+}

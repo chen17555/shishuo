@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.czh.shishuo.admin.dao.UserCollectBlogMapper" >
+  <resultMap id="BaseResultMap" type="com.czh.shishuo.model.UserCollectBlog" >
+    <id column="user_id" property="userId" jdbcType="INTEGER" />
+    <id column="blog_id" property="blogId" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    user_id, blog_id, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.czh.shishuo.model.UserCollectBlogKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_collect_blog
+    where user_id = #{userId,jdbcType=INTEGER}
+      and blog_id = #{blogId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.czh.shishuo.model.UserCollectBlogKey" >
+    delete from user_collect_blog
+    where user_id = #{userId,jdbcType=INTEGER}
+      and blog_id = #{blogId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.czh.shishuo.model.UserCollectBlog" >
+    insert into user_collect_blog (user_id, blog_id, create_time, 
+      update_time)
+    values (#{userId,jdbcType=INTEGER}, #{blogId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.czh.shishuo.model.UserCollectBlog" >
+    insert into user_collect_blog
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="blogId != null" >
+        blog_id,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="blogId != null" >
+        #{blogId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.czh.shishuo.model.UserCollectBlog" >
+    update user_collect_blog
+    <set >
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=INTEGER}
+      and blog_id = #{blogId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.czh.shishuo.model.UserCollectBlog" >
+    update user_collect_blog
+    set create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where user_id = #{userId,jdbcType=INTEGER}
+      and blog_id = #{blogId,jdbcType=INTEGER}
+  </update>
+</mapper>

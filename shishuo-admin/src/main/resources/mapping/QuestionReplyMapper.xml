@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.czh.shishuo.admin.dao.QuestionReplyMapper">
+  <resultMap id="BaseResultMap" type="com.czh.shishuo.model.QuestionReply">
+    <id column="qust_reply_id" jdbcType="INTEGER" property="qustReplyId" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="parent_id" jdbcType="INTEGER" property="parentId" />
+    <result column="repley_content" jdbcType="VARCHAR" property="repleyContent" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="reply_status" jdbcType="INTEGER" property="replyStatus" />
+    <result column="question_id" jdbcType="INTEGER" property="questionId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    qust_reply_id, user_id, parent_id, repley_content, create_time, reply_status, question_id
+  </sql>
+  <select id="selectQuestionReplyByParentId" parameterType="java.lang.Integer" resultType="com.czh.shishuo.admin.vo.QuestionReplyVO">
+    SELECT
+    qust_reply_id AS  qustReplyId,
+    question_reply.user_id AS userId,
+    user_nickname AS userNickName,
+    user_avatar AS userAvatar,
+    repley_content AS repleyContent,
+    question_reply.create_time AS repleyTime,
+    (SELECT count(*) from question_reply qr where qr.parent_id = question_reply.qust_reply_id) as replyNum
+    FROM
+    question_reply
+    LEFT JOIN user_info ON ( question_reply.user_id = user_info.user_id )
+    WHERE
+    parent_id = #{parentId}
+    AND reply_status != 0
+    ORDER BY
+    question_reply.create_time
+  </select>
+  <select id="selectByQuestionId" parameterType="java.lang.Integer" resultType="com.czh.shishuo.admin.vo.QuestionReplyVO">
+    SELECT
+        qust_reply_id AS  qustReplyId,
+        question_reply.user_id AS userId,
+        user_nickname AS userNickName,
+        user_avatar AS userAvatar,
+        repley_content AS repleyContent,
+        question_reply.create_time AS repleyTime,
+        (SELECT count(*) from question_reply qr where qr.parent_id = question_reply.qust_reply_id) as replyNum
+    FROM
+        question_reply
+        LEFT JOIN user_info ON ( question_reply.user_id = user_info.user_id )
+    WHERE
+        question_id = #{questionId}
+        AND parent_id IS NULL
+        AND reply_status != 0
+    ORDER BY
+        question_reply.create_time
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from question_reply
+    where qust_reply_id = #{qustReplyId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from question_reply
+    where qust_reply_id = #{qustReplyId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.czh.shishuo.model.QuestionReply">
+    insert into question_reply (qust_reply_id, user_id, parent_id, 
+      repley_content, create_time, reply_status, 
+      question_id)
+    values (#{qustReplyId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{parentId,jdbcType=INTEGER}, 
+      #{repleyContent,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{replyStatus,jdbcType=INTEGER}, 
+      #{questionId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.czh.shishuo.model.QuestionReply">
+    insert into question_reply
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="qustReplyId != null">
+        qust_reply_id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="parentId != null">
+        parent_id,
+      </if>
+      <if test="repleyContent != null">
+        repley_content,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="replyStatus != null">
+        reply_status,
+      </if>
+      <if test="questionId != null">
+        question_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="qustReplyId != null">
+        #{qustReplyId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="repleyContent != null">
+        #{repleyContent,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="replyStatus != null">
+        #{replyStatus,jdbcType=INTEGER},
+      </if>
+      <if test="questionId != null">
+        #{questionId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.czh.shishuo.model.QuestionReply">
+    update question_reply
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="parentId != null">
+        parent_id = #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="repleyContent != null">
+        repley_content = #{repleyContent,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="replyStatus != null">
+        reply_status = #{replyStatus,jdbcType=INTEGER},
+      </if>
+      <if test="questionId != null">
+        question_id = #{questionId,jdbcType=INTEGER},
+      </if>
+    </set>
+    where qust_reply_id = #{qustReplyId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.czh.shishuo.model.QuestionReply">
+    update question_reply
+    set user_id = #{userId,jdbcType=INTEGER},
+      parent_id = #{parentId,jdbcType=INTEGER},
+      repley_content = #{repleyContent,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      reply_status = #{replyStatus,jdbcType=INTEGER},
+      question_id = #{questionId,jdbcType=INTEGER}
+    where qust_reply_id = #{qustReplyId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.czh.shishuo.admin.dao.KeymanMapper">
+  <resultMap id="BaseResultMap" type="com.czh.shishuo.model.Keyman">
+    <result column="tb_name" jdbcType="VARCHAR" property="tbName" />
+    <result column="primary_key" jdbcType="INTEGER" property="primaryKey" />
+  </resultMap>
+  <select id="selectPrimaryKeyByTableName" resultType="java.lang.Integer" parameterType="java.lang.String">
+    SELECT
+      primary_key
+    FROM
+      keyman
+    where tb_name = #{tbName}
+  </select>
+  <update id="updatePrimaryKeyByTableName" parameterType="com.czh.shishuo.model.Keyman">
+    UPDATE keyman
+    <set>
+      primary_key = primary_key + 1
+    </set>
+    where tb_name = #{tbName}
+  </update>
+  <insert id="insert" parameterType="com.czh.shishuo.model.Keyman">
+    insert into keyman (tb_name, primary_key)
+    values (#{tbName,jdbcType=VARCHAR}, #{primaryKey,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.czh.shishuo.model.Keyman">
+    insert into keyman
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tbName != null">
+        tb_name,
+      </if>
+      <if test="primaryKey != null">
+        primary_key,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tbName != null">
+        #{tbName,jdbcType=VARCHAR},
+      </if>
+      <if test="primaryKey != null">
+        #{primaryKey,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+</mapper>

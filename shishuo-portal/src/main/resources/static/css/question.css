@@ -1,0 +1,334 @@
+body{
+	font: 14px/1.5 "PingFang SC","微软雅黑","Microsoft YaHei",Helvetica,"Helvetica Neue",Tahoma,Arial,sans-serif;
+}
+.wenda{
+
+}
+.wenda-main{
+	float:left;
+}
+.wenda-slider{
+	width: 280px;
+	float:right;
+}
+.nb a{
+	font-size: 16px;
+    color: #787d82;
+    line-height: 20px;
+    text-align: left;
+    margin-right: 50px;
+}
+.nb{
+	border-bottom: 1px solid #D0D6D9;
+}
+.nav a.active{
+	color: #F01400;
+}
+.ques-answer{
+	position: relative;
+	padding-left: 56px;
+	padding-top: 20px;
+	padding-bottom: 24px;
+	border-bottom: 1px solid #D0D6D9;
+}
+.ques-answer .tag-img{
+	position: absolute;
+    left: 0;
+    top: 25px;
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+}
+.ques-answer .tag-img img{
+	display: block;
+	width: 100%;
+	height: 100%;
+}
+.ques-answer .from-tag{
+	height: 20px;
+    font-size: 12px;
+    line-height: 20px;
+    overflow: hidden;
+    color: #787d82;
+}
+.ques-answer .from-tag a{
+	font-size: 12px;
+    color: #787d82;
+    margin-left: 15px;
+}
+.ques-answer .ques-con{
+	line-height: 20px;
+	position: relative;
+}
+.ques-answer .ques-con a{
+    font-size: 18px;
+    font-weight: 600;
+    color: #14191e;
+}
+.ques-answer .ques-con a.ques-con-content{
+    display: block;
+    line-height: 28px;
+    margin-right: 30px;
+    word-break: break-all;
+}
+.ques-answer .info-bar{
+	height: 30px;
+	overflow: hidden;
+	margin-top: 20px;
+}
+.ques-answer .info-bar .to-answer{
+	float: left;
+    width: 72px;
+    height: 27px;
+    border: 1px solid #d0d6d9;
+    font-size: 14px;
+    line-height: 27px;
+    text-align: center;
+    color: #787d82;
+}
+.ques-answer .info-bar .integral-info{
+	float: left;
+	margin-left: 12px;
+    color: #14191e;
+}
+.ques-answer .info-bar .integral-info a{
+    font-size: 14px;
+	line-height: 30px;
+	color: #b5b9bc;
+	text-align: left;
+}
+.ques-answer .info-bar .answer-num, .ques-answer .info-bar .follow{
+    float: left;
+    font-size: 14px;
+    line-height: 30px;
+    color: #b5b9bc;
+    text-align: left;
+    margin-left: 20px;
+}
+.user-about{
+    padding: 20px;
+	background-color: #f3f3f3;
+}
+.user-about .user-info{
+    position: relative;
+    padding-left: 50px;
+    border-bottom: 1px solid #d0d6d9;
+    padding-bottom: 20px;
+}
+.user-about .user-info .user-pic{
+    position: absolute;
+	left: 0;
+	top: 0;
+	width: 40px;
+	height: 40px;
+	border-radius: 20px;
+	overflow: hidden;
+}
+.user-about .user-info .user-pic a,.user-about .user-info .user-pic img{
+    display: block;
+	height: 100%;
+}
+.user-about .user-info .user-name{
+    height: 20px;
+	overflow: hidden;
+}
+.user-about .user-info .user-name a{
+    font-size: 14px;
+    color: #14191e;
+    line-height: 20px;
+    text-align: left;
+}
+.user-about .user-action{
+    margin-top: 20px;
+	overflow: hidden;
+}
+.user-about .user-action span{
+	position: relative;
+    font-size: 14px;
+    color: #14191e;
+    line-height: 20px;
+    padding: 0 10px;
+    width: 33%;
+    float: left;
+    text-align: center;
+    box-sizing: border-box;
+}
+.my-follow-class, .quiz a, .user-about{
+	margin-bottom: 30px;
+}
+.my-follow-class h3{
+	position: relative;
+    height: 20px;
+    padding-bottom: 30px;
+    font-size: 16px;
+    text-align: left;
+    color: #14191e;
+    line-height: 20px;
+    border-bottom: 1px solid #d0d6d9;
+    margin-bottom: 10px;
+}
+.my-follow-class h3 span{
+	position: absolute;
+    right: 0;
+    top: 0;
+    width: 20px;
+    height: 20px;
+    color: #999da1;
+    font-size: 20px;
+    cursor: pointer;
+}
+.my-follow-class .tag-box a{
+    float: left;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    height: 28px;
+    padding: 0 10px;
+    border: 1px solid #d0d6d9;
+    font-size: 14px;
+    color: #787d82;
+    text-align: center;
+    line-height: 28px;
+    cursor: pointer;
+}
+.hot-ques{
+	margin-bottom: 30px;
+}
+.hot-ques .title{
+    font-size: 16px;
+    color: #14191e;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #d0d6d9;
+}
+.hot-ques li{
+	padding: 15px 0;
+	border-bottom: 1px solid #edf1f2;
+}
+.hot-ques li .content a{
+    font-size: 14px;
+    color: #14191e;
+    word-wrap: break-word;
+}
+.hot-ques li .info-bar{
+    height: 20px;
+    margin-top: 7px;
+    overflow: hidden;
+}
+.hot-ques li .info-bar a{
+	float: left;
+    font-size: 12px;
+    line-height: 20px;
+    color: #b5b9bc;
+}
+.hot-ques li .info-bar .anser-num{
+	margin-right: 30px;
+}
+.hot-ques li .info-bar .from{
+	float: right;
+}
+
+.wd-top-slogan {
+    margin-bottom: 4px;
+    height: 96px;
+    background: url(/static/img/wenda_title_bg.png);
+    padding: 24px;
+    box-sizing: border-box;
+}
+.wd-top-slogan span {
+    float: left;
+    line-height: 48px;
+    display: inline-block;
+    font-size: 24px;
+    color: #07111B;
+    letter-spacing: 3px;
+}
+.wd-top-slogan a {
+    width: 137px;
+    height: 48px;
+    line-height: 48px;
+    text-align: center;
+    background-color: #f01414;
+    color: #fff;
+    float: right;
+    font-size: 16px;
+    border-radius: 4px;
+}
+.recommend-class {
+    margin-bottom: 35px;
+}
+.recommend-class .title {
+    height: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #d0d6d9;
+}
+.recommend-class .title h3 {
+    float: left;
+    line-height: 20px;
+    text-align: left;
+    color: #14191e;
+    font-size: 16px;
+}
+.recommend-class .title span {
+    float: right;
+    line-height: 20px;
+    text-align: right;
+    color: #787d82;
+    font-size: 14px;
+    cursor: pointer;
+}
+.recommend-class .cls-list li {
+    margin-top: 24px;
+}
+.recommend-class .cls-list .class-info {
+    position: relative;
+    padding: 0 50px;
+}
+.recommend-class .cls-list .class-info .class-icon {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 36px;
+    height: 36px;
+    overflow: hidden;
+}
+.recommend-class .cls-list .class-info .class-icon a, .recommend-class .cls-list .class-info .class-icon img {
+    display: block;
+    height: 100%;
+}
+.recommend-class .cls-list .class-info h4 {
+    height: 18px;
+}
+.recommend-class .cls-list .class-info h4 a {
+    line-height: 18px;
+    color: #14191e;
+    font-size: 16px;
+    text-align: left;
+    font-weight: 600;
+}
+.recommend-class .cls-list .class-info .follow-person {
+    height: 18px;
+    line-height: 18px;
+    color: #b5b9bc;
+    font-size: 12px;
+    text-align: left;
+}
+.recommend-class .cls-list .class-info .follow {
+    position: absolute;
+    right: 0;
+    top: 3px;
+    padding: 0 10px;
+    height: 28px;
+    line-height: 28px;
+    font-size: 14px;
+    color: #787d82;
+    text-align: center;
+    border: 1px solid #d0d6d9;
+    overflow: hidden;
+    cursor: pointer;
+}
+.recommend-class .cls-list .desc {
+    color: #787d82;
+    line-height: 24px;
+    font-size: 14px;
+    margin-top: 10px;
+    word-break: break-all;
+}

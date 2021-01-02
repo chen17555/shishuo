@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>layout 后台大布局 - Layui</title>
+    <link rel="stylesheet" href="layui/css/layui.css">
+</head>
+
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo">layui 后台布局</div>
+        <!-- 头部区域（可配合layui已有的水平导航） -->
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item">
+                <a href="javascript:;">
+                    <img src="http://t.cn/RCzsdCq" class="layui-nav-img"> 贤心
+                </a>
+                <dl class="layui-nav-child">
+                    <dd>
+                        <a href="">基本资料</a>
+                    </dd>
+                    <dd>
+                        <a href="">安全设置</a>
+                    </dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item">
+                <a href="">退了</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree" lay-filter="test">
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="" href="javascript:;">举报审核</a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="report_question.html">问答</a>
+                        </dd>
+                        <dd>
+                            <a href="report_user_reply.html">用户回复</a>
+                        </dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a href="javascript:;">用户管理</a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="user_list.html">用户列表</a>
+                        </dd>
+                        <dd>
+                            <a href="user_add.html">添加用户</a>
+                        </dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a href="javascript:;">问答列表</a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="question_list.html">问答列表</a>
+                        </dd>
+                        <dd>
+                            <a href="question_recovery.html">问答恢复</a>
+                        </dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a href="javascript:;">博客列表</a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="blog_list.html">博客列表</a>
+                        </dd>
+                        <dd>
+                            <a href="blog_recovery.html">博客恢复</a>
+                        </dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a href="javascript:;">通知列表</a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="notice.html">通知管理</a>
+                        </dd>
+                        <dd>
+                            <a href="notice_add.html">发布通知</a>
+                        </dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="tag.html">标签管理</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="layui-body">
+        <div style="padding: 15px;">
+            <table class="layui-table" lay-data="{ cellMinWidth: 80,height:'full-200', url:'/back/report/replylist', page:true, id:'testReload'}" lay-filter="demo">
+                <thead>
+                <tr>
+                    <th lay-data="{type:'checkbox', fixed: 'left'}"></th>
+                    <th lay-data="{field:'reportId', fixed: true}">举报号</th>
+                    <th lay-data="{field:'reportTags'}">类型</th>
+                    <th lay-data="{field:'reportDesc'}">原因</th>
+                    <th lay-data="{field:'reportedUserNickname'}">被举报用户</th>
+                    <th lay-data="{field:'complainUserNickname'}">举报用户</th>
+                    <th lay-data="{field:'reportTime'}">时间</th>
+                    <th lay-data="{fixed: 'right', align:'center', toolbar: '#barDemo'}"></th>
+                </tr>
+                </thead>
+            </table>
+            <script type="text/html" id="barDemo">
+                <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+                <a class="layui-btn layui-btn-xs" lay-event="edit">忽略</a>
+                <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除回复</a>
+            </script>
+        </div>
+    </div>
+
+    <div class="layui-footer">
+    </div>
+</div>
+<script src="layui/layui.js"></script>
+<script>
+    layui.use('table', function(){
+        var table = layui.table;
+        //监听表格复选框选择
+        table.on('checkbox(demo)', function(obj){
+            console.log(obj)
+        });
+        //监听工具条
+        table.on('tool(demo)', function(obj){
+            var data = obj.data;
+            if(obj.event === 'detail'){
+                window.open("/wenda/detail/"+data.reportedId+"#"+data.reportedReplyId);
+            } else if(obj.event === 'del'){
+                layer.confirm('真的删除么', function(index){
+                    obj.del();
+                    layer.close(index);
+                    data.types = 2;
+                    data.reportedType = 2;
+                    $.ajax({
+                        url:"/back/report/update",
+                        data:data,
+                        dataType:'json',
+                        success:function(result){
+                            if(result.code == 0){
+                                console.log("删除成功");
+                            }
+                        }
+                    })
+                });
+            } else if(obj.event === 'edit'){
+                data.types = 1;
+                $.ajax({
+                    url:"/back/report/update",
+                    data:data,
+                    dataType:'json',
+                    success:function(result){
+                        if(result.code == 0){
+                            console.log("删除成功");
+                        }
+                    }
+                })
+                obj.del();
+                layer.close(index);
+            }
+        });
+
+        var $ = layui.$, active = {
+            getCheckData: function(){ //获取选中数据
+                var checkStatus = table.checkStatus('idTest')
+                    ,data = checkStatus.data;
+                layer.alert(JSON.stringify(data));
+            }
+            ,getCheckLength: function(){ //获取选中数目
+                var checkStatus = table.checkStatus('idTest')
+                    ,data = checkStatus.data;
+                layer.msg('选中了：'+ data.length + ' 个');
+            }
+            ,isAll: function(){ //验证是否全选
+                var checkStatus = table.checkStatus('idTest');
+                layer.msg(checkStatus.isAll ? '全选': '未全选')
+            }
+        };
+
+        $('.demoTable .layui-btn').on('click', function(){
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+        });
+    });
+</script>
+</body>
+
+</html>
