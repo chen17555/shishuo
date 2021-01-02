@@ -13,7 +13,7 @@ import com.czh.shishuo.vo.ResultVO;
 import javax.annotation.Resource;
 
 @RestController
-@RequestMapping("back/question")
+@RequestMapping("question")
 public class QuestionBackController {
 
     @Resource

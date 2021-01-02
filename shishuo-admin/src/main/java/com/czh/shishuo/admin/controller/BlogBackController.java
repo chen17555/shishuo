@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 
 @RestController
-@RequestMapping("back/blog")
+@RequestMapping("blog")
 public class BlogBackController {
 
     @Resource

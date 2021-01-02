@@ -14,7 +14,7 @@ import com.czh.shishuo.vo.ResultVO;
 import javax.annotation.Resource;
 
 @RestController
-@RequestMapping("back/notice")
+@RequestMapping("notice")
 public class NoticeBackController {
 
     @Resource

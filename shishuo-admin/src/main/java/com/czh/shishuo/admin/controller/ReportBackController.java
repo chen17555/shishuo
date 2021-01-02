@@ -12,7 +12,7 @@ import com.czh.shishuo.vo.ResultVO;
 import javax.annotation.Resource;
 
 @RestController
-@RequestMapping("back/report")
+@RequestMapping("report")
 public class ReportBackController {
 
     @Resource
